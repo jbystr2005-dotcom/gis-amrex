@@ -7,8 +7,7 @@ public:
     explicit Simulation(const GISData& data);
 
     void initialize();
-    void run();
 
 private:
-    GISData gisData;
+    const GISData& gisData;
 };
