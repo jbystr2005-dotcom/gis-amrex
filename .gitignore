@@ -13,3 +13,7 @@ cmake-build-*/
 
 # OS files
 .DS_Store
+
+# AMReX build artifacts
+tmp_build_dir/
+*.ex
