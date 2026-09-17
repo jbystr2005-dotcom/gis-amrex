@@ -1,20 +1,28 @@
 #include <iostream>
+#include <AMReX.H>
 #include "GISProcessor.H"
 #include "Simulation.H"
 
-int main()
+using namespace amrex;
+
+int main(int argc, char* argv[])
 {
-    GISProcessor processor;
+    Initialize(argc, argv);
+    
+    {
+        GISProcessor processor;
 
-    GISData data = processor.load("data/export.geojson");
+        GISData data = processor.load("data/export.geojson");
 
-    Simulation simulation(data);
+        Simulation simulation(data);
 
-    simulation.initialize();
+        simulation.initialize();
 
-    cout << "Width: " << data.width << "\n";
-    cout << "Height: " << data.height << "\n";
-    cout << "Number of buildings: " << data.buildings.size() << "\n";
+        cout << "Width: " << data.width << "\n";
+        cout << "Height: " << data.height << "\n";
+        cout << "Number of buildings: " << data.buildings.size() << "\n";
+    }
 
+    Finalize();
     return 0;
 }
