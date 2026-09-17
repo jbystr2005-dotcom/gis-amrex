@@ -1,0 +1,15 @@
+# Compiled binaries / objects
+gis_test
+*.exe
+*.o
+*.out
+
+# Build directories
+build/
+cmake-build-*/
+
+# VS Code
+.vscode/
+
+# OS files
+.DS_Store
