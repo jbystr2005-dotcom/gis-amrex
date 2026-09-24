@@ -2,6 +2,7 @@
 #include <AMReX_Box.H>
 #include <AMReX_ParmParse.H>
 #include <AMReX_Print.H>
+#include <AMReX_RealBox.H>
 
 using namespace amrex;
 
@@ -19,8 +20,11 @@ void Simulation::initialize()
 
     Box grid(domainLo, domainHi);
 
+    Real probLo[AMREX_SPACEDIM] = {0.0, 0.0};
+    Real probHi[AMREX_SPACEDIM] = {gisData.width, gisData.height};
+    RealBox realBox(probLo, probHi);
+
     Print()
-        << "Domain low: " << grid.smallEnd() << "\n"
-        << "Domain high: " << grid.bigEnd() << "\n"
-        << "Cells: " << grid.numPts() << "\n";
+        << "Physical domain low: " << realBox.lo(0) << ", " << realBox.lo(1) << "\n"
+        << "Physical domain high: " << realBox.hi(0) << ", " << realBox.hi(1) << "\n";
 }
