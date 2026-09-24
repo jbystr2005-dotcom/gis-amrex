@@ -3,6 +3,8 @@ gis_test
 *.exe
 *.o
 *.out
+test_geometry
+plt*
 
 # Build directories
 build/
