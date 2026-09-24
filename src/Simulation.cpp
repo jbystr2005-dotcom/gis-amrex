@@ -3,6 +3,7 @@
 #include <AMReX_ParmParse.H>
 #include <AMReX_Print.H>
 #include <AMReX_RealBox.H>
+#include <AMReX_Geometry.H>
 
 using namespace amrex;
 
@@ -22,9 +23,16 @@ void Simulation::initialize()
 
     Real probLo[AMREX_SPACEDIM] = {0.0, 0.0};
     Real probHi[AMREX_SPACEDIM] = {gisData.width, gisData.height};
-    RealBox realBox(probLo, probHi);
+    RealBox physicalSpace(probLo, probHi);
+
+    int coord = 0;
+    int isPeriodic[AMREX_SPACEDIM] = {0, 0};
+
+    Geometry geometry(grid, &physicalSpace, coord, isPeriodic);
+
+    const Real* cellSize = geometry.CellSize();
 
     Print()
-        << "Physical domain low: " << realBox.lo(0) << ", " << realBox.lo(1) << "\n"
-        << "Physical domain high: " << realBox.hi(0) << ", " << realBox.hi(1) << "\n";
+        << "dx: " << cellSize[0] << " meters\n"
+        << "dy: " << cellSize[1] << " meters\n";
 }
