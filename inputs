@@ -1,1 +1,2 @@
 geometry.n_cell = 256 256
+geometry.max_grid_size = 64
