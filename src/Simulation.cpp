@@ -4,6 +4,8 @@
 #include <AMReX_Print.H>
 #include <AMReX_RealBox.H>
 #include <AMReX_Geometry.H>
+#include <AMReX_BoxArray.H>
+#include <AMReX_DistributionMapping.H>
 
 using namespace amrex;
 
@@ -30,9 +32,14 @@ void Simulation::initialize()
 
     Geometry geometry(grid, &physicalSpace, coord, isPeriodic);
 
-    const Real* cellSize = geometry.CellSize();
+    BoxArray gridArray(grid);
 
-    Print()
-        << "dx: " << cellSize[0] << " meters\n"
-        << "dy: " << cellSize[1] << " meters\n";
+    int maxGridSize = 64;
+
+    parameters.query("max_grid_size", maxGridSize);
+    gridArray.maxSize(maxGridSize);
+
+    DistributionMapping distributionMap(gridArray);
+
+    Print() << "Number of boxes: " << gridArray.size() << "\n";
 }
