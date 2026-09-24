@@ -3,12 +3,9 @@
 #include "GISProcessor.H"
 #include "Simulation.H"
 
-using namespace amrex;
-
 int main(int argc, char* argv[])
 {
-    Initialize(argc, argv);
-    
+    amrex::Initialize(argc, argv);
     {
         GISProcessor processor;
 
@@ -17,12 +14,7 @@ int main(int argc, char* argv[])
         Simulation simulation(data);
 
         simulation.initialize();
-
-        cout << "Width: " << data.width << "\n";
-        cout << "Height: " << data.height << "\n";
-        cout << "Number of buildings: " << data.buildings.size() << "\n";
     }
-
-    Finalize();
+    amrex::Finalize();
     return 0;
 }
